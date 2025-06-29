@@ -27,7 +27,7 @@ with tab1:
         output = st.selectbox('Chọn định dạng đầu ra:', ImageConverter.get_file_format_supported())
         if st.button('Chuyển đổi ảnh'):
             with st.spinner('Đang xử lí...'):
-                temp_path = f'convert-{file_uploaded.name}'
+                temp_path = f'oceconvert'
                 with open(temp_path, 'wb') as f:
                     f.write(file_uploaded.getbuffer())
                 
