@@ -42,3 +42,16 @@ with tab1:
                     os.remove(result)
                 else:
                     st.error('Đã xảy ra lỗi, vui lòng thử lại')
+
+
+with tab2:
+    st.header('Chuyển đổi tài liệu')
+    st.info('Under construction')
+
+with tab3:
+    st.header('Chuyển đổi âm thanh')
+    st.info('Under construction')
+
+with tab4:
+    st.header('Chuyển đổi video')
+    st.info('Under construction')
