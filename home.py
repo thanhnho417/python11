@@ -1,48 +1,53 @@
 import os
 import streamlit as st
-import pandas as pd
+import tempfile
+import uuid
 from PIL import Image
-from PyPDF2 import PdfReader
-from docx import Document
-import pandas as pd
-import ffmpeg
 from imgconverter import ImageConverter
-import pdfconverter
-#Chương trình chính
+
+# Cấu hình trang
 st.set_page_config(
     page_icon='🔄',
     page_title='File Converter - Designed by oce',
     layout='wide'
 )
+
 st.title('File Converter - Công cụ chuyển đổi định dạng File')
 st.subheader('Chọn chức năng')
 tab1, tab2, tab3, tab4 = st.tabs(['Hình ảnh', 'Tài liệu', 'Âm thanh', 'Video'])
 
-
 with tab1:
     st.header('Chuyển đổi hình ảnh')
     file_uploaded = st.file_uploader('Tải ảnh lên', type=ImageConverter.get_file_format_supported())
+
     if file_uploaded:
         st.image(file_uploaded, caption='Ảnh muốn chuyển đổi', width=200)
         output = st.selectbox('Chọn định dạng đầu ra:', ImageConverter.get_file_format_supported())
+
         if st.button('Chuyển đổi ảnh'):
             with st.spinner('Đang xử lí...'):
-                temp_path = f'oceconvert'
+                file_ext = file_uploaded.name.split('.')[-1]
+                temp_path = os.path.join(tempfile.gettempdir(), f"oceconvert_{uuid.uuid4()}.{file_ext}")
+
                 with open(temp_path, 'wb') as f:
                     f.write(file_uploaded.getbuffer())
-                
-                success, result = ImageConverter.file_convert(temp_path,output)
 
-                os.remove(temp_path)
+                success, result = ImageConverter.file_convert(temp_path, output)
 
-                if success:
+                if os.path.exists(temp_path):
+                    os.remove(temp_path)
+
+                if success and os.path.exists(result):
                     st.success('Hoàn thành')
-                    with open (result, 'rb') as f:
-                        st.download_button(label='Tải xuống', data=f,file_name=os.path.basename(result), mime=f'image/{output.lower()}')
+                    mime_map = {'jpg': 'image/jpeg', 'jpeg': 'image/jpeg', 'png': 'image/png', 'webp': 'image/webp'}
+                    mime_type = mime_map.get(output.lower(), f'image/{output.lower()}')
+
+                    with open(result, 'rb') as f:
+                        st.download_button(label='Tải xuống', data=f, file_name=os.path.basename(result), mime=mime_type)
+                    
                     os.remove(result)
                 else:
-                    st.error('Đã xảy ra lỗi, vui lòng thử lại')
-
+                    st.error('Đã xảy ra lỗi, có thể file đã tồn tại trong hệ thống, vui lòng thử lại')
 
 with tab2:
     st.header('Chuyển đổi tài liệu')
