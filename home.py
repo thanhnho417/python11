@@ -47,7 +47,7 @@ with tab1:
                     
                     os.remove(result)
                 else:
-                    st.error('Đã xảy ra lỗi, có thể file đã tồn tại trong hệ thống, vui lòng thử lại')
+                    st.error('Đã xảy ra lỗi, có thể file không hỗ trợ cho định dạng nay, vui lòng thử lại hoặc chuyển sang định dạng khác')
 
 with tab2:
     st.header('Chuyển đổi tài liệu')
