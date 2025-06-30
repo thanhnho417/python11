@@ -23,7 +23,7 @@ with tab1:
     if files_uploaded:
         cols = st.columns(len(files_uploaded))
         for col, file in zip(cols,files_uploaded):
-            col.image(file, width=200)
+            col.image(file, caption=file.name, width=200)
             
             
             
