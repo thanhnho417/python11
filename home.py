@@ -9,7 +9,7 @@ from imgconverter import ImageConverter
 st.set_page_config(
     page_icon='🔄',
     page_title='File Converter - Designed by oce',
-    layout='wide'
+    layout="wide", initial_sidebar_state="auto"
 )
 st.markdown(
     """
