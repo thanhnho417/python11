@@ -6,6 +6,7 @@ from PIL import Image
 from imgconverter import ImageConverter
 import zipfile
 import io
+from audioconverter import AudioConverter
 # Cấu hình trang
 st.set_page_config(
     page_icon='🔄',
@@ -63,11 +64,11 @@ with tab1:
                     
                     zip.seek(0)
                     st.success("Thành công")
-                    st.download_button(label='Tải xuống toàn bộ', data=zip, file_name='ocefileconverter.zip', mime='application/zip')
+                    st.download_button(label='Tải xuống', data=zip, file_name='ocefileconverter.zip', mime='application/zip')
                 else:
                     st.error('Lỗi chuyển đổi. Có thể những file này không hỗ trợ định dạng trên, thử lại hoặc chọn định dạng khác')
         
-        
+
         
         
         
@@ -83,10 +84,9 @@ with tab1:
 with tab2:
     st.header('Chuyển đổi tài liệu')
     st.info('Under construction')
-
 with tab3:
     st.header('Chuyển đổi âm thanh')
-    st.info('Under construction')
+    audio_uploaded = st.file_uploader(label='Tải file âm thanh lên', accept_multiple_files=True, type=AudioConverter.get_audio_file_supported())
 
 with tab4:
     st.header('Chuyển đổi video')
