@@ -3,6 +3,6 @@ pillow
 pypdf2 
 python-docx 
 pandas 
-ffmpeg-python 
+ffmpeg-python
 openpyxl
 pydub
