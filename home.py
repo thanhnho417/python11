@@ -62,7 +62,10 @@ with tab1:
                             os.remove(file_path)
                     
                     zip.seek(0)
+                    st.success("Thành công")
                     st.download_button(label='Tải xuống toàn bộ', data=zip, file_name='ocefileconverter.zip', mime='application/zip')
+                else:
+                    st.error('Lỗi chuyển đổi. Có thể những file này không hỗ trợ định dạng trên, thử lại hoặc chọn định dạng khác')
         
         
         
