@@ -11,7 +11,12 @@ st.set_page_config(
     page_title='File Converter - Designed by oce',
     layout='wide'
 )
-
+st.markdown(
+    """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    """,
+    unsafe_allow_html=True
+)
 st.title('File Converter - Công cụ chuyển đổi định dạng File')
 st.subheader('Chọn chức năng')
 tab1, tab2, tab3, tab4 = st.tabs(['Hình ảnh', 'Tài liệu', 'Âm thanh', 'Video'])
